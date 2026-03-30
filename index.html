@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunwar Anmol Singh | Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Background Animation --- */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 6rem 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            align-items: flex-start;
+            padding-top: 10rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            max-width: 600px;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--light);
+            background: transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* --- About & Education --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .edu-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .edu-card:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
+        .edu-year {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .edu-school {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .edu-grade {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- Skills --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* --- Experience --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--dark);
+        }
+
+        .role {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .company {
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .timeline ul {
+            list-style-position: inside;
+            color: var(--text-gray);
+            margin-top: 1rem;
+        }
+
+        .timeline li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Projects --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .project-links {
+            margin-top: 1.5rem;
+        }
+
+        .project-links a {
+            color: var(--light);
+            margin-right: 1rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Leadership & Achievements --- */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Contact --- */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Kunwar Anmol Singh</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="hero-content">
+            <h2>Hello, I'm</h2>
+            <h1>Kunwar Anmol Singh</h1>
+            <p>Data Analyst | ECE Engineer | Tech Enthusiast</p>
+            <p>Transforming raw data into actionable insights and building scalable tech solutions. Currently pursuing B.Tech at MAIT with a passion for AI and Analytics.</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View Work</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-grid">
+            <div>
+                <h3 style="margin-bottom: 1rem; color: var(--accent);">Who I Am</h3>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">
+                    I am an Electronics and Communication Engineering student with a strong foundation in Data Analytics and Machine Learning. My journey involves bridging the gap between hardware systems (IoT/Robotics) and data-driven decision-making. As the Founder of Mera IPU, I am dedicated to solving real-world academic problems through technology.
+                </p>
+                
+                <h3 style="margin-bottom: 1rem; color: var(--accent);">Technical Skills</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">PowerBI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Excel</span>
+                    <span class="skill-tag">Streamlit</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent);">Education</h3>
+                
+                <div class="edu-card">
+                    <div class="edu-year">Aug 2023 - 2027 (Expected)</div>
+                    <div class="edu-school">Maharaja Agrasen Institute of Technology</div>
+                    <div class="edu-grade">B.Tech in Electronics & Communication | GPA: 8.2</div>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-year">2022 - 2023</div>
+                    <div class="edu-school">Apeejay School, Panchsheel Park</div>
+                    <div class="edu-grade">Grade XII, CBSE | 91.6%</div>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-year">2020 - 2021</div>
+                    <div class="edu-school">Apeejay School, Panchsheel Park</div>
+                    <div class="edu-grade">Grade X, CBSE | 80.2%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Work <span>Experience</span></h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="role">Data Analyst Intern</div>
+                <div class="company">Nextup Robotics</div>
+                <div class="edu-year">Dec 2024 – Mar 2025</div>
+                <ul>
+                    <li>Analyzed sensor and telemetry data from ESP32/Arduino IoT systems to assess operational performance.</li>
+                    <li>Performed exploratory data analysis on navigation datasets, contributing to a 15% improvement in robot response time.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="role">Analyst Fellowship</div>
+                <div class="company">CrackNonTech</div>
+                <div class="edu-year">Jan 2026 – Feb 2026</div>
+                <ul>
+                    <li>Executed business analysis including profitability, market sizing, and entry strategy.</li>
+                    <li>Used SQL and Python for data analysis and presented insights through stakeholder presentations.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="role">Research Intern – SiC Lab</div>
+                <div class="company">Defence Research and Development Organisation (DRDO)</div>
+                <div class="edu-year">Jul 2025 – Aug 2025</div>
+                <ul>
+                    <li>Conducted Silicon Carbide (SiC) material stability analysis for next-gen solid-state batteries.</li>
+                    <li>Performed comparative feasibility analysis between SiC-based and conventional lithium-ion batteries.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Featured <span>Projects</span></h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>InsightFlow Analytics</h3>
+                    <div class="project-tech">
+                        <span>Python</span> <span>Pandas</span> <span>Streamlit</span> <span>Plotly</span>
+                    </div>
+                    <p style="color: var(--text-gray);">
+                        A no-code analytics web application allowing users to upload CSV files, perform automated data cleaning, and generate interactive visualizations without programming expertise. Reduced analysis time by 70%.
+                    </p>
+                    <div class="project-links">
+                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>CollegeInDino</h3>
+                    <div class="project-tech">
+                        <span>EdTech</span> <span>LMS</span> <span>Content Platform</span>
+                    </div>
+                    <p style="color: var(--text-gray);">
+                        Built and launched an online Learning Management System (LMS) similar to Udemy. Enabled structured course hosting and integrated a YouTube channel to drive student acquisition and engagement.
+                    </p>
+                    <div class="project-links">
+                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="#"><i class="fas fa-globe"></i> Website</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>SERTOS</h3>
+                    <div class="project-tech">
+                        <span>IoT</span> <span>Smart Systems</span>
+                    </div>
+                    <p style="color: var(--text-gray);">
+                        Smart Ambulance & Traffic Management System presented at the Innovation Mela in MAIT. Designed to optimize emergency response times through intelligent traffic signaling.
+                    </p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-trophy"></i> Innovation Mela</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Leadership & Achievements -->
+    <section id="leadership" style="background: rgba(0,0,0,0.2);">
+        <h2 class="section-title">Leadership & <span>Achievements</span></h2>
+        
+        <div class="about-grid" style="margin-bottom: 3rem;">
+            <div class="achievement-card" style="grid-column: span 2; text-align: left; display: flex; align-items: center; gap: 2rem;">
+                <i class="fas fa-users-cog achievement-icon" style="margin:0;"></i>
+                <div>
+                    <h3 style="color: var(--accent);">President / Founder</h3>
+                    <h4 style="margin: 0.5rem 0;">Mera IPU (meraipu.in)</h4>
+                    <p style="color: var(--text-gray);">Jul 2025 – Present</p>
+                    <p style="color: var(--text-gray); margin-top: 0.5rem;">Led a 20-member cross-functional team to build a centralized academic platform, enabling streamlined access for 9000+ IPU B.Tech students.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <i class="fas fa-medal achievement-icon"></i>
+                <h4>PitchYour Idea Summit</h4>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Secured 3rd Prize for presenting the Kisaan Setup project.</p>
+            </div>
+            <div class="achievement-card">
+                <i class="fas fa-code achievement-icon"></i>
+                <h4>SIH 2024 Qualified</h4>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Successfully qualified Internal Hackathon showcasing innovative problem-solving.</p>
+            </div>
+            <div class="achievement-card">
+                <i class="fas fa-certificate achievement-icon"></i>
+                <h4>IIT Kanpur AI Training</h4>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Completed Summer Training Program covering ML, DL, ANN, CNN.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>kunwaranmolsingh2005@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91-8368867358</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/anmol110923</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/kunwar-anmol</span>
+                </div>
+            </div>
+            
+            <div style="max-width: 400px; width: 100%;">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    I am currently open to internships and collaborative projects in Data Analytics, AI, and IoT. Feel free to reach out!
+                </p>
+                <a href="mailto:kunwaranmolsingh2005@gmail.com" class="btn btn-primary" style="width: 100%; text-align: center;">Say Hello</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Kunwar Anmol Singh. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Simple Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .project-card, .edu-card, .achievement-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
